@@ -4,46 +4,48 @@ var github = require('octonode');
 var fs = require('fs');
 var path = require('path');
 
-var simplegit = require("simple-git")(path.join(process.cwd())); //revisar esta ruta luego por si da problemas
+var simplegit
 var namerepo;
 
 
 
-function pedirdatos(){
+function pedirdatos(dir){
   
   console.log("\n============ DATOS DE USUARIO ============")
+  simplegit = require("simple-git")(path.join(process.cwd(), dir)); 
   prompt.start();
 
   prompt.get([
-    { name: 'username', required: true }, 
-    { name: 'password', hidden: true, conform: function (value)  { return true; } },
+    { name: 'username', required: true, description: "Introduzca el username" }, 
+    { name: 'password', hidden: true, description: "Introduzca el password", conform: function (value)  { return true; } },
     { name: 'nombre_repo', required: true, description: "Nombre repositorio"}
     ], function (err, result) {
         if(err)
             return err;
         
         namerepo = result.nombre_repo
-        getclienttoken(result.username, result.password); //llamamos a la funcion que obtiene el token si ya ha sido creado o lo crea si no es asi con ese user y pass
+        console.log(dir)
+        getclienttoken(result.username, result.password, dir); //llamamos a la funcion que obtiene el token si ya ha sido creado o lo crea si no es asi con ese user y pass
     });
 }
 
 
-function getclienttoken(user, pass){
+function getclienttoken(user, pass, dir){
 
     var comprobar;
-    fs.existsSync(path.resolve(__dirname,'..','.gitbook-start','config.json')) ? comprobar=true : comprobar=false;
+    fs.existsSync(path.resolve(process.cwd(),dir,'.gitbook-start','config.json')) ? comprobar=true : comprobar=false;
     
     if(comprobar){
-        obtenertoken();
+        obtenertoken(dir);
     }
     else{
-        generartoken(user, pass)
+        generartoken(user, pass, dir)
     }
 }
 
 
 
-function generartoken(user, pass){
+function generartoken(user, pass, dir){
     
     console.log("\n============ GENERANDO TOKEN ============")
 
@@ -62,11 +64,15 @@ function generartoken(user, pass){
         console.log("\tToken generado: " + token);
         
         //Creamos config.json y guardamos token en él
-        var dirtoken=path.resolve(__dirname,'..','.gitbook-start','config.json');
+        var dirtoken=path.resolve(process.cwd(),dir,'.gitbook-start','config.json');
         var json = '{\n\t"tokens": {\n\t\t"github": "'+token+'" \n\t}\n}';
 
 
-        fs.mkdirSync(path.resolve(__dirname,'..','.gitbook-start'));
+        fs.mkdirSync(path.resolve(process.cwd(),dir,'.gitbook-start'), function(err){
+            if(err)
+                return err
+        });
+        
         fs.writeFileSync(dirtoken, json);
         
         crear_repo(token)
@@ -76,10 +82,10 @@ function generartoken(user, pass){
 }
 
 
-function obtenertoken(){
+function obtenertoken(dir){
  
     console.log("\n============ OBTENIENDO TOKEN ============")
-    var json = require(path.resolve(__dirname,'..','.gitbook-start','config.json'))
+    var json = require(path.resolve(process.cwd(),dir,'.gitbook-start','config.json'))
     var token = json.tokens.github
     
     console.log("\tToken obtenido: "+ token)
@@ -114,7 +120,7 @@ function crear_repo(token){
                         )
              
             //Iniciando repo en el directorio del usuario y añadiendole el remoto para que pueda hacer push            
-            simplegit.init().addRemote('origin', data.ssh_url);
+            simplegit.init().addRemote('origin', data.ssh_url).add('.').commit('First Commit').push(['-uf', 'origin', 'master'], function (err, data) {});
             return data;
         }
     });

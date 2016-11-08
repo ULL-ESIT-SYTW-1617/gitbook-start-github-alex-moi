@@ -1,8 +1,8 @@
 {
   "name": "gitbook-start-github-alex-moi",
-  "version": "0.0.2",
+  "version": "0.0.16",
   "description": "Module to build a book on GitBook",
-  "main": "bin/gitbook-start-github.js",
+  "main": "gitbook-start-github.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -29,7 +29,7 @@
     "url": "https://github.com/ULL-ESIT-SYTW-1617/crear-repositorio-en-github-alex-moi/issues"
   },
   "bin": {
-    "gitbook-start-alex-moi-nitesh": "./bin/gitbook-start-github.js"
+    "gitbook-start-alex-moi-nitesh": "./gitbook-start-github.js"
   },
   "homepage": "https://github.com/ULL-ESIT-SYTW-1617/crear-repositorio-en-github-alex-moi#readme",
   "dependencies": {
