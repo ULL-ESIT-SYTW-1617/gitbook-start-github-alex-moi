@@ -1,6 +1,6 @@
 {
   "name": "gitbook-start-github-alex-moi",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Module to build a book on GitBook",
   "main": "gitbook-start-github.js",
   "scripts": {

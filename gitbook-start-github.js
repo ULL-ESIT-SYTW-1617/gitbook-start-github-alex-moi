@@ -17,8 +17,9 @@ var child = require("child_process");
 
 function initialize(directorio) {
     
-    console.log("\nmodulo initialize");
-   
+
+    console.log("\n============ INSTALANDO DEPENDENCIAS ============")
+    console.log("\nEspere mientras el proceso termina ...")
     
     var contenido='\ngulp.task("deploy-github", function () {'+ 
         '\n\tvar github = require("gitbook-start-github-alex-moi");'+
@@ -43,8 +44,7 @@ function initialize(directorio) {
     child.exec('cd '+directorio+';npm install; gulp build', function(error, stdout, stderr){
         if(error)
           console.log(error)
-        console.log("\n============ INSTALANDO DEPENDENCIAS ============")
-        console.log("\nEspere mientras el proceso termina ...")
+
         console.log(stderr);
         console.log(stdout);
         
