@@ -24,9 +24,9 @@ Después de ello, tendremos creado un repositorio en nuestra cuenta con el nombr
 
 A continuación ejecute lo siguiente en la carpeta que se ha creado:
 1. `npm install`
-2. `gulp build`
-3. `gulp deploy`
-4. `gulp deploy-github`
+2. `gulp build` contruirá en la carpeta gh-pages el book
+3. `gulp deploy` subirá los cambios a la rama **gh-pages**
+4. `gulp deploy-github` subirá los cambios a la rama **master**
 5. Acceda a https://usuario.github.io/nombre_repositorio y tendrá su libro publicado
 
 
