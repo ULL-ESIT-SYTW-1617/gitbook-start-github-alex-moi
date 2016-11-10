@@ -21,6 +21,7 @@ Despues de haber ejecutado el comando del paso de Instalacion, el programa nos p
 Después de ello, tendremos creado un repositorio en nuestra cuenta con el nombre que hayamos puesto con un primer commit que contiene un desarrollo inicial del gitbook.
 
 A continuación para subir cambios al repositorio creado, ejecute lo siguiente en la carpeta del gitbook:
+
 1. `npm install`
 2. `gulp build` contruirá en la carpeta gh-pages el book
 3. `gulp deploy` subirá los cambios a la rama **gh-pages**
