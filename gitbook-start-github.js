@@ -51,9 +51,17 @@ function initialize(directorio) {
 function deploy() {
 
     console.log("Comenzando el deploy en GITHUB");
-   
-    simplegit.add('.').commit('Update repo').push(['-uf', 'origin', 'master'], function (err, data) {});
+    console.log("Realizando gulp build ...");
+    
+    child.exec('gulp build', function(error, stdout, stderr){
+        if(error)
+          console.log(error)
 
+        console.log(stderr);
+        console.log(stdout);
+        
+        simplegit.add('.').commit('Update repo').push(['-uf', 'origin', 'master'], function (err, data) { if(err) return console.log(err); console.log(data)});
+      });
 };
 
 
