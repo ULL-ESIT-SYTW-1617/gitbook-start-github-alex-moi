@@ -7,28 +7,25 @@ Ofrece la posibilidad de crear un **repositorio github** con un esquema preparad
 
 ## Instalación
 
-**Debemos de tener** instalados el paquete principal tanto en **global** como en **local**
+**Debemos tener** instalado el paquete principal en **global**. Con esto hecho no es necesario instalar el paquete plugin github puesto que al ejecutar la aplicación de la forma que se expone a continuación, ésta lo instala por nosotros.
+Por tanto, ejecutamos desde el directorio de nuestro gitbook:
 ```shell
-npm install -g gitbook-start-alex-moi-nitesh
-npm install --save gitbook-start-alex-moi-nitesh
+gitbook-start-alex-moi-nitesh -d github
 ```
+**Nota:** Al ejecutar este comando el programa tardará unos segundos para instalar el plugin github.
 
 ## Funcionamiento
 
-Para ejecutar el plugin, debemos de ejecutar `gitbook-start-alex-moi-nitesh -d github <opciones>`. Por ejemplo:
-`gitbook-start-alex-moi-nitesh -d github -c prueba`
+Despues de haber ejecutado el comando del paso de Instalacion, el programa nos pedirá que introduzcamos el **usuario** y la **contraseña** de github y un **nombre para nuestro repositorio**.
 
-Tardará un rato y nos pedirá que introduzcamos el **usuario** y la **contraseña** de github y un **nombre para nuestro repositorio**.
+Después de ello, tendremos creado un repositorio en nuestra cuenta con el nombre que hayamos puesto con un primer commit que contiene un desarrollo inicial del gitbook.
 
-Después de ello, tendremos creado un repositorio en nuestra cuenta con el nombre que hayamos puesto.
-
-A continuación ejecute lo siguiente en la carpeta que se ha creado:
+A continuación para subir cambios al repositorio creado, ejecute lo siguiente en la carpeta del gitbook:
 1. `npm install`
 2. `gulp build` contruirá en la carpeta gh-pages el book
 3. `gulp deploy` subirá los cambios a la rama **gh-pages**
 4. `gulp deploy-github` subirá los cambios a la rama **master**
 5. Acceda a https://usuario.github.io/nombre_repositorio y tendrá su libro publicado
-
 
 
 
