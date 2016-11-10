@@ -28,20 +28,13 @@ function initialize(directorio) {
 
     
     //añadimos la tarea
-    fs.writeFileSync(path.join(process.cwd(), 'node_modules','gitbook-start-alex-moi-nitesh','gulpfile.js'), contenido,  {'flag':'a'},  function(err) {
+    fs.writeFileSync(path.join(process.cwd(),'gulpfile.js'), contenido,  {'flag':'a'},  function(err) {
         if (err) 
             return console.error(err);
     });
     
-    
-    //copiamos gulpfile a nuestro directorio
-    fs.copyFile(path.join(process.cwd(), 'node_modules','gitbook-start-alex-moi-nitesh','gulpfile.js'), path.join(process.cwd(), directorio , 'gulpfile.js'),function(err){
-        if(err)
-          console.log(err);
-    });
-    
-    
-    child.exec('cd '+directorio+';npm install; gulp build', function(error, stdout, stderr){
+    /*'cd '+directorio+';*/
+    child.exec('npm install; gulp build', function(error, stdout, stderr){
         if(error)
           console.log(error)
 
@@ -49,7 +42,7 @@ function initialize(directorio) {
         console.log(stdout);
         
         //Aqui se llama a la funcion q pide los datos pa crear el repo, luego genera token y crea repo
-        modulo_repo.pedirdatos(directorio);//Hasta que no se instalen las depencias y no se cree la carpeta ghpages no se ejecuta esto :)
+        modulo_repo.pedirdatos();//Hasta que no se instalen las depencias y no se cree la carpeta ghpages no se ejecuta esto :)
       });
 
 };
