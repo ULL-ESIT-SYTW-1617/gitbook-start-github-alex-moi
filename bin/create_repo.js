@@ -32,7 +32,7 @@ function pedirdatos(){
 function getclienttoken(user, pass){
 
     var comprobar;
-    fs.existsSync(path.resolve(process.cwd(),'.gitbook-start','config.json')) ? comprobar=true : comprobar=false;
+    fs.existsSync(path.resolve(process.env.HOME,'.gitbook-start','config.json')) ? comprobar=true : comprobar=false;
     
     if(comprobar){
         obtenertoken();
@@ -63,11 +63,11 @@ function generartoken(user, pass){
         console.log("\tToken generado: " + token);
         
         //Creamos config.json y guardamos token en él
-        var dirtoken=path.resolve(process.cwd(),'.gitbook-start','config.json');
+        var dirtoken=path.resolve(process.env.HOME,'.gitbook-start','config.json');
         var json = '{\n\t"tokens": {\n\t\t"github": "'+token+'" \n\t}\n}';
 
 
-        fs.mkdirSync(path.resolve(process.cwd(),'.gitbook-start'), function(err){
+        fs.mkdirSync(path.resolve(process.env.HOME,'.gitbook-start'), function(err){
             if(err)
                 return err
         });
@@ -84,7 +84,7 @@ function generartoken(user, pass){
 function obtenertoken(){
  
     console.log("\n============ OBTENIENDO TOKEN ============")
-    var json = require(path.resolve(process.cwd(),'.gitbook-start','config.json'))
+    var json = require(path.resolve(process.env.HOME,'.gitbook-start','config.json'))
     var token = json.tokens.github
     
     console.log("\tToken obtenido: "+ token)
